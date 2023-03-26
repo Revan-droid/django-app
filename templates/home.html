@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Intrusion Detection System</title>    
+    <link rel="stylesheet" href='{% static "home.css"%}' type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Bree+Serif&display=swap" rel="stylesheet">
+</head>
+<body>
+{% csrf_token %} 
+  <nav id="navbar">
+    <div id="logo">
+        
+    </div>
+    <ul>
+        <li class="item"><a href="">Home</a></li>
+        <li class="item"><a href="#form">Form</a></li>
+        <li class="item"><a href="#analyseddata-container">Analysed Data</a></li>
+        <li class="item"><a href="#client-section">Work Flow</a></li>
+        <li class="item"><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+  </nav>
+  <section id="home">
+    <h3 class="h-primary" >National security always matters, obviously. But the reality is that if you have an open door in your software for the good guys, the bad guys get in there, too. </h3>
+    <h3 class="h-primary">-Tim Cook</h3>
+    <p style="font-size: 30px;"><a href="#form">A portal to check intrusion</a></p>
+  </section>
+  <br/>
+  <section id="form">
+    <h2 class="h-primary center"> Fill the details</h2>
+    <div id="form-box">
+        <form action="/" method="post">{% csrf_token %}
+            <div class="form-group">
+                <label for = "rate">Rate: </label><br>
+                <input type="Number" name="rate" id="rate" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+            </div>
+            <div class="form-group">
+                <label for="sttl">STTL: </label><br>
+                <input type="Number" name="sttl" id="sttl" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+            </div>
+            <div class="form-group">
+                <label for="sload">SLOAD: </label><br>
+                <input type="number" name="sload" id="sload" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+            </div>
+            <div class="form-group">
+                <label for="dload">DLOAD: </label><br>
+                <input type="Number" name="dload" id="dload" placeholder="Enter a Number" step="0.0001" min="0" max="1"required="true">
+            </div>
+
+            <div class="form-group">
+                <label for="ct_srv_src">ct_srv_src: </label><br>
+                <input type="Number" name="ct_srv_src" id="ct_srv_src" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+            </div>
+            
+            <div class="form-group">
+                <label for="ct_state_ttl">ct_state_ttl: </label><br>
+                <input type="Number" name="ct_state_ttl" id="ct_state_ttl" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+            </div>
+            
+            <div class="form-group">
+                <label for="ct_dst_ltm">ct_dst_ltm: </label><br>
+                <input type="Number" name="ct_dst_ltm" id="ct_dst_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+            </div>     
+
+            <div class="form-group">
+                <label for="ct_src_dport_ltm">ct_src_dport_ltm: </label><br>
+                <input type="Number" name="ct_src_dport_ltm" id="ct_src_dport_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+            </div>
+            
+            <div class="form-group">
+                <label for="ct_dst_sport_ltm">ct_dst_sport_ltm: </label><br>
+                <input type="Number" name="ct_dst_sport_ltm" id="ct_dst_sport_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+            </div>
+            
+            <div class="form-group">
+                <label for="ct_dst_src_ltm">ct_dst_src_ltm</label><br>
+                <input type="Number" name="ct_dst_src_ltm" id="ct_dst_src_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+            </div>                 
+
+            <div class="form-group">
+                <label for="ct_src_ltm">ct_src_ltm: </label><br>
+                <input type="Number" name="ct_src_ltm" id="ct_src_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+            </div>
+            
+            <div class="form-group">
+                <label for="state_CON">state_CON: </label><br>
+                <input type="Number" name="state_CON" id="state_CON" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+            </div>
+            
+            <div class="form-group">
+                <label for="state_INT">state_INT: </label><br>
+                <input type="Number" name="state_INT" id="state_INT" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+            </div>
+            
+                 <input class="submit-button" type="submit">
+         </form>
+      </div>
+    </section>
+    <br/>
+    <section id="analyseddata-container">
+        <h1 class="h-primary center">Analysed Data</h1>
+        <div id="analyseddata">
+            <div class="box">
+            <h2 class="center">Analysis of Dataset</h2>
+            <br/>
+            <ul>
+                <li><a href="http://127.0.0.1:5500/templates/classified2.html" class="button-15" method="get" role="button">Binary classification</a></li><br/>
+                <li><a href="http://127.0.0.1:5500/templates/classifiedmul.html" class="button-15" method ="post" role="button" >Multi classification</a></li><br/>
+                <li><a href="http://127.0.0.1:5500/templates/correlation2.html" class="button-15" method ="post" role="button">Correlation matrix for binary labels</a></li><br/>
+                <li><a href="http://127.0.0.1:5500/templates/correlationmul.html" class="button-15" method ="post" role="button">Correlation matrix for multi labels</a></li>
+            </ul>
+           </div>
+            <div class="box">
+                <ul>
+                    <h2 class="center">Binary Label</h2>
+                    <br/>
+                    <li><a href="http://127.0.0.1:5500/templates/lg.html" class="button-15" method="get" role="button">Linear Regression</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/lrg.html" class="button-15" method ="post" role="button" >Logistic Regression</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/lvsm.html" class="button-15" method ="post" role="button">LSVM</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/knn.html" class="button-15" method ="post" role="button">Knn</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/rf.html" class="button-15" method ="post" role="button">Random Forest</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/dt.html" class="button-15" method ="post" role="button">Decision Tree</a></li>
+                </ul>
+            </div>
+            <div class="box">
+                <h2 class="center">Multi Label</h2>
+                <br/>
+                <ul>
+                    <li><a href="http://127.0.0.1:5500/templates/lgm.html" class="button-15" method="get" role="button"> Linear Regression</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/lgrm.html" class="button-15" method ="post" role="button" >Logistic Regression</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/lvsmm.html" class="button-15" method ="post" role="button">LSVM</a></button></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/knnm.html" class="button-15" method ="post" role="button">Knn</a></button></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/rfm.html" class="button-15" method ="post" role="button">Random Forest</a></button></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/dtm.html" class="button-15" method ="post" role="button">Decision Tree</a></button></li>
+                </ul>
+            </div>
+            <div class="box">
+                <h2 class="center">Results</h2>
+                <ul>
+                    <li><a href="http://127.0.0.1:5500/templates/lg.html" class="button-15" method="get" role="button"> Linear Regression</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/lrg.html" class="button-15" method ="post" role="button" >Logistic Regression</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/lvsm.html" class="button-15" method ="post" role="button">LSVM</a></button></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/knn.html" class="button-15" method ="post" role="button">Knn</a></button></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/rf.html" class="button-15" method ="post" role="button">Random Forest</a></button></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/dt.html" class="button-15" method ="post" role="button">Decision Tree</a></button></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <br\>
+    <section id="client-section">
+        <h1 class="h-primary center">Work Flow</h1>
+        <div id="scroll-container">
+            <div id="scroll-text">Collecting Raw Network Packets>>>Preparing Data Set>>>Data Pre Processing>>>Data Normalization>>>Data Splitting>>><br/>
+                Train The Model>>>Evaluate the accuracy , precision , recall and f1 score>>> Created a Web App using Django framework.<div>
+        </div>
+    </section>
+  <br/>
+  <footer>
+    <div class="center">
+        Only For Educational Purposes!
+    </div>
+   </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
