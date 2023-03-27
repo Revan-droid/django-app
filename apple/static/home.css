@@ -45,12 +45,10 @@ html{
 
 #navbar ul li{ 
     list-style: none;
-    color:#00b99a;
     font-size: 1.3rem;
 }
 
 #navbar ul li a{
-    color:rgb(26, 182, 99);
     display: block;
     padding: 3px 22px;
     border-radius: 9px;
@@ -58,8 +56,8 @@ html{
 }
 
 #navbar ul li a:hover{
-    color:rgb(42, 200, 73);
-    background-color:rgb(31, 163, 58);
+    color:rgb(255, 255, 255);
+    background-color:rgb(21, 24, 22);
 }
 /* Home Section */
 #home{
@@ -323,9 +321,9 @@ footer{
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
     
-    -moz-animation: my-animation 90s linear infinite;
-    -webkit-animation: my-animation 90slinear infinite;
-    animation: my-animation 90s linear infinite;
+    -moz-animation: my-animation 70s linear infinite;
+    -webkit-animation: my-animation 70slinear infinite;
+    animation: my-animation 70s linear infinite;
   }
   
   /* for Firefox */

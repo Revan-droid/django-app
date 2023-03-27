@@ -2,11 +2,17 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+
 import joblib
+
 loaded_lr_model = joblib.load("ML_models\lr_bin.joblib")
+
 # Create your views here.
 @login_required(login_url='login')
 def HomePage(request):
+    return render (request,'home.html')
+
+def ResultsPage(request):
     if request.method == 'POST':
         rate=request.POST.get('rate','default')
         sttl=request.POST.get('sttl','default')
@@ -19,18 +25,37 @@ def HomePage(request):
         ct_dst_sport_ltm=request.POST.get('ct_dst_sport_ltm','default')		
         ct_dst_src_ltm=request.POST.get('ct_dst_src_ltm','default')
         ct_src_ltm=request.POST.get('ct_src_ltm','default')
+        ct_srv_dst=request.POST.get('ct_srv_dst','default')
         state_CON=request.POST.get('state_CON','default')
         state_INT=request.POST.get('state_INT','default')
-        labels=[[float(rate),float(sttl),float(sload),float(dload),float(ct_srv_src),float(ct_state_ttl),float(ct_dst_ltm),float(ct_src_dport_ltm),float(ct_dst_sport_ltm),float(ct_dst_src_ltm),float(ct_src_ltm),float(state_CON),float(state_INT)]]
+        labels=[[float(rate),
+                 float(sttl),
+                 float(sload),
+                 float(dload),
+                 float(ct_srv_src),
+                 float(ct_state_ttl),
+                 float(ct_dst_ltm),
+                 float(ct_src_dport_ltm),
+                 float(ct_dst_sport_ltm),
+                 float(ct_dst_src_ltm),
+                 float(ct_src_ltm),
+                 float(ct_srv_dst),
+                 float(state_CON),
+                 float(state_INT)]]
         our_labels = loaded_lr_model.predict(labels)
+        round = lambda x:1 if x>0.6 else 0
+        b=round(our_labels)
+        if b==0:
+            a="Normal"
+        if b==1:
+            a="Abnormal"
+        details={
+            "answer":b,
+            "attack":a,
+        }
 
-        if our_labels[0]==0:
-            wine_quality="A Poor Quality Wine"
-        if 400<our_labels[0]==1:
-            wine_quality="A good Quality Wine"
-        		
-        print(wine_quality)
-    return render (request,'home.html')
+        return render(request,'results.html',details)
+    return (request,'results.html')
 
 def SignUpPage(request):
     if request.method=='POST':
@@ -56,11 +81,8 @@ def LoginPage(request):
             return redirect('home')
         else:
             return render (request,'incorrect password.html')
-
     return render (request,'login.html')
-
-    
-                
+          
 def LogoutPage(request):
     logout(request)
     return redirect('login')

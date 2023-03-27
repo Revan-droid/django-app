@@ -32,7 +32,8 @@
   <section id="form">
     <h2 class="h-primary center"> Fill the details</h2>
     <div id="form-box">
-        <form action="/" method="post">{% csrf_token %}
+        <form action="results/" method="post">
+            {% csrf_token %}
             <div class="form-group">
                 <label for = "rate">Rate: </label><br>
                 <input type="Number" name="rate" id="rate" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
@@ -84,6 +85,11 @@
                 <label for="ct_src_ltm">ct_src_ltm: </label><br>
                 <input type="Number" name="ct_src_ltm" id="ct_src_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
             </div>
+
+            <div class="form-group">
+                <label for="ct_srv_dst">ct_src_ltm: </label><br>
+                <input type="Number" name="ct_srv_dst" id="ct_srv_dst" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+            </div>
             
             <div class="form-group">
                 <label for="state_CON">state_CON: </label><br>
@@ -94,7 +100,6 @@
                 <label for="state_INT">state_INT: </label><br>
                 <input type="Number" name="state_INT" id="state_INT" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
             </div>
-            
                  <input class="submit-button" type="submit">
          </form>
       </div>
