@@ -97,7 +97,6 @@ html{
 #analyseddata{
     margin: 34px;
     display: flex;
-    
 }
 #analyseddata .box{ 
     border: 2px solid rgb(5, 50, 251);
@@ -106,6 +105,7 @@ html{
     border-radius: 28px;
     background: #f2f2f2;
     margin-bottom: 20px;
+    align-self: center;
 }
 
 #analyseddata .box img{ 
@@ -116,7 +116,6 @@ html{
 
 #analyseddata .box p{
     font-family: 'Times NewRoman', serif;
-
 } 
 
 /* Clients Section */
@@ -165,7 +164,6 @@ html{
     height: 100%;
     z-index: -1;
     opacity: 0.85;
-    
     background: url("") no-repeat center center/cover;
 
 }
@@ -177,7 +175,7 @@ html{
 }
 .form-group input{
     width:500px;
-    padding: 0px 0px 10px 10px;
+    padding: 5px;
     border-radius: 9px;
     font-size: 1.1rem;
 }

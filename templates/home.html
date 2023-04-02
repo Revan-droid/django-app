@@ -8,12 +8,72 @@
     <title>Intrusion Detection System</title>    
     <link rel="stylesheet" href='{% static "home.css"%}' type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Bree+Serif&display=swap" rel="stylesheet">
+    <style>
+        .dropbtn {
+          background-color: #3498DB;
+          color: white;
+          padding: 16px;
+          font-size: 16px;
+          border: none;
+          cursor: pointer;
+        }
+        
+        .dropbtn:hover, .dropbtn:focus {
+          background-color: #2980B9;
+        }
+        
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+        
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f1f1f1;
+          min-width: 160px;
+          overflow: auto;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+        
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+        
+        .dropdown a:hover {background-color: #ddd;}
+        
+        .show {display: block;}
+        </style>
+          <script>
+            /* When the user clicks on the button, 
+            toggle between hiding and showing the dropdown content */
+            function myFunction() {
+              document.getElementById("myDropdown").classList.toggle("show");
+            }
+            
+            // Close the dropdown if the user clicks outside of it
+            window.onclick = function(event) {
+              if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                  var openDropdown = dropdowns[i];
+                  if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                  }
+                }
+              }
+            }
+            </script>
 </head>
-<body>
+<body onload="preloader()">
 {% csrf_token %} 
   <nav id="navbar">
     <div id="logo">
-        
     </div>
     <ul>
         <li class="item"><a href="">Home</a></li>
@@ -29,80 +89,98 @@
     <p style="font-size: 30px;"><a href="#form">A portal to check intrusion</a></p>
   </section>
   <br/>
+
   <section id="form">
-    <h2 class="h-primary center"> Fill the details</h2>
+    <h2 class="h-primary center">Predict Your Intrusion Now </h2>
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a>Rate:The data rate is the number of bits transmitted from one device to another or over a network per second.</a>
+          <a>STTL:Source to destination time to live value.</a>
+          <a>SLOAD:Source bits per second.</a>
+          <a>DLOAD:Destination bits per second.</a>
+          <a>CT_SRV_SRC:No.of Connections that contain the same service and same Source address in 100 connections according to last time.</a>
+          <a>CT_STATE_TTL:No. for each state according to specific range of values for source/destination to live.</a>
+          <a>CT_DST_LTM:No.of Connections that contain the same Destination address in 100 Connections according to last time.</a>
+          <a>CT_SRC_DPORT_LTM:No.of Connections that contain the same Source address and Destination Port in 100 Connections according to last time.</a>
+          <a>CT_DST_SPORT_LTM:No.of Connections that contain the same Destination address and Source Port in 100 Connections according to last time.</a>
+          <a>CT_DST_SRC_LTM:No.of Connections that contain the same Source address and Destination addressin 100 Connections according to last time.</a>
+          <a>CT_SRC_LTM:No.of Connections that contain the Same Source address in 100 Connections according to last time.</a>
+          <a>CT_SRV_DST:No.of Connections that contain the Same Service and Destination address in 100 connections according to last time.</a>
+        </div>
+      </div>
     <div id="form-box">
         <form action="results/" method="post">
             {% csrf_token %}
             <div class="form-group">
                 <label for = "rate">Rate: </label><br>
-                <input type="Number" name="rate" id="rate" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+                <input type="Number" name="rate" id="rate" placeholder="Enter a Number" step="0.0001" min="0" max="100000" required="true">
             </div>
             <div class="form-group">
                 <label for="sttl">STTL: </label><br>
-                <input type="Number" name="sttl" id="sttl" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+                <input type="Number" name="sttl" id="sttl" placeholder="Enter a Number" step="0.0001" min="0" max="100000" required="true">
             </div>
             <div class="form-group">
                 <label for="sload">SLOAD: </label><br>
-                <input type="number" name="sload" id="sload" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+                <input type="number" name="sload" id="sload" placeholder="Enter a Number" step="0.0001" min="0" max="100000" required="true">
             </div>
             <div class="form-group">
                 <label for="dload">DLOAD: </label><br>
-                <input type="Number" name="dload" id="dload" placeholder="Enter a Number" step="0.0001" min="0" max="1"required="true">
+                <input type="Number" name="dload" id="dload" placeholder="Enter a Number" step="0.0001" min="0" max="100000"required="true">
             </div>
 
             <div class="form-group">
                 <label for="ct_srv_src">ct_srv_src: </label><br>
-                <input type="Number" name="ct_srv_src" id="ct_srv_src" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+                <input type="Number" name="ct_srv_src" id="ct_srv_src" placeholder="Enter a Number" step="0.0001" min="0" max="100000" required="true">
             </div>
             
             <div class="form-group">
                 <label for="ct_state_ttl">ct_state_ttl: </label><br>
-                <input type="Number" name="ct_state_ttl" id="ct_state_ttl" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+                <input type="Number" name="ct_state_ttl" id="ct_state_ttl" placeholder="Enter a Number" step="0.0001" min="0" max="100000" required="true">
             </div>
             
             <div class="form-group">
                 <label for="ct_dst_ltm">ct_dst_ltm: </label><br>
-                <input type="Number" name="ct_dst_ltm" id="ct_dst_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+                <input type="Number" name="ct_dst_ltm" id="ct_dst_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="100000" required="true">
             </div>     
 
             <div class="form-group">
                 <label for="ct_src_dport_ltm">ct_src_dport_ltm: </label><br>
-                <input type="Number" name="ct_src_dport_ltm" id="ct_src_dport_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+                <input type="Number" name="ct_src_dport_ltm" id="ct_src_dport_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="100000" required="true">
             </div>
             
             <div class="form-group">
                 <label for="ct_dst_sport_ltm">ct_dst_sport_ltm: </label><br>
-                <input type="Number" name="ct_dst_sport_ltm" id="ct_dst_sport_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+                <input type="Number" name="ct_dst_sport_ltm" id="ct_dst_sport_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="100000" required="true">
             </div>
             
             <div class="form-group">
                 <label for="ct_dst_src_ltm">ct_dst_src_ltm</label><br>
-                <input type="Number" name="ct_dst_src_ltm" id="ct_dst_src_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+                <input type="Number" name="ct_dst_src_ltm" id="ct_dst_src_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="100000" required="true">
             </div>                 
 
             <div class="form-group">
                 <label for="ct_src_ltm">ct_src_ltm: </label><br>
-                <input type="Number" name="ct_src_ltm" id="ct_src_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+                <input type="Number" name="ct_src_ltm" id="ct_src_ltm" placeholder="Enter a Number" step="0.0001" min="0" max="100000" required="true">
             </div>
 
             <div class="form-group">
-                <label for="ct_srv_dst">ct_src_ltm: </label><br>
-                <input type="Number" name="ct_srv_dst" id="ct_srv_dst" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+                <label for="ct_srv_dst">ct_srv_dst: </label><br>
+                <input type="Number" name="ct_srv_dst" id="ct_srv_dst" placeholder="Enter a Number" step="0.0001" min="0" max="100000" required="true">
             </div>
             
             <div class="form-group">
                 <label for="state_CON">state_CON: </label><br>
-                <input type="Number" name="state_CON" id="state_CON" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+                <input type="Number" name="state_CON" id="state_CON" placeholder="Enter a Number" step="0.0001" min="0" max="100000" required="true">
             </div>
             
             <div class="form-group">
                 <label for="state_INT">state_INT: </label><br>
-                <input type="Number" name="state_INT" id="state_INT" placeholder="Enter a Number" step="0.0001" min="0" max="1" required="true">
+                <input type="Number" name="state_INT" id="state_INT" placeholder="Enter a Number" step="0.0001" min="0" max="100000" required="true">
             </div>
                  <input class="submit-button" type="submit">
          </form>
-      </div>
+         </div>
     </section>
     <br/>
     <section id="analyseddata-container">
@@ -112,45 +190,45 @@
             <h2 class="center">Analysis of Dataset</h2>
             <br/>
             <ul>
-                <li><a href="http://127.0.0.1:5500/templates/classified2.html" class="button-15" method="get" role="button">Binary classification</a></li><br/>
-                <li><a href="http://127.0.0.1:5500/templates/classifiedmul.html" class="button-15" method ="post" role="button" >Multi classification</a></li><br/>
-                <li><a href="http://127.0.0.1:5500/templates/correlation2.html" class="button-15" method ="post" role="button">Correlation matrix for binary labels</a></li><br/>
-                <li><a href="http://127.0.0.1:5500/templates/correlationmul.html" class="button-15" method ="post" role="button">Correlation matrix for multi labels</a></li>
+                <li><a href="http://127.0.0.1:5500/templates/Analysis%20Of%20Datase/classified2.html" style="text-decoration:none" class="button-15" method="get" role="button">Binary classification</a></li><br/>
+                <li><a href="http://127.0.0.1:5500/templates/Analysis%20Of%20Datase/classifiedmul.html" style="text-decoration:none" class="button-15" method ="post" role="button" >Multi classification</a></li><br/>
+                <li><a href="http://127.0.0.1:5500/templates/Analysis%20Of%20Datase/correlation2.html" style="text-decoration:none" class="button-15" method ="post" role="button">Correlation matrix for binary labels</a></li><br/>
+                <li><a href="http://127.0.0.1:5500/templates/Analysis%20Of%20Datase/correlationmul.html" style="text-decoration:none" class="button-15" method ="post" role="button">Correlation matrix for multi labels</a></li>
             </ul>
            </div>
             <div class="box">
                 <ul>
                     <h2 class="center">Binary Label</h2>
                     <br/>
-                    <li><a href="http://127.0.0.1:5500/templates/lg.html" class="button-15" method="get" role="button">Linear Regression</a></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/lrg.html" class="button-15" method ="post" role="button" >Logistic Regression</a></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/lvsm.html" class="button-15" method ="post" role="button">LSVM</a></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/knn.html" class="button-15" method ="post" role="button">Knn</a></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/rf.html" class="button-15" method ="post" role="button">Random Forest</a></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/dt.html" class="button-15" method ="post" role="button">Decision Tree</a></li>
+                    <li><a href="http://127.0.0.1:5500/templates/Binary%20Labels/lg.html" style="text-decoration:none" class="button-15" method="get" role="button">Linear Regression</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/Binary%20Labels/lrg.html" style="text-decoration:none" class="button-15" method ="post" role="button" >Logistic Regression</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/Binary%20Labels/lvsm.html" style="text-decoration:none" class="button-15" method ="post" role="button">LSVM</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/Binary%20Labels/knn.html" style="text-decoration:none" class="button-15" method ="post" role="button">Knn</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/Binary%20Labels/rf.html" style="text-decoration:none" class="button-15" method ="post" role="button">Random Forest</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/Binary%20Labels/dt.html" style="text-decoration:none" class="button-15" method ="post" role="button">Decision Tree</a></li>
                 </ul>
             </div>
             <div class="box">
                 <h2 class="center">Multi Label</h2>
                 <br/>
                 <ul>
-                    <li><a href="http://127.0.0.1:5500/templates/lgm.html" class="button-15" method="get" role="button"> Linear Regression</a></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/lgrm.html" class="button-15" method ="post" role="button" >Logistic Regression</a></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/lvsmm.html" class="button-15" method ="post" role="button">LSVM</a></button></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/knnm.html" class="button-15" method ="post" role="button">Knn</a></button></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/rfm.html" class="button-15" method ="post" role="button">Random Forest</a></button></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/dtm.html" class="button-15" method ="post" role="button">Decision Tree</a></button></li>
+                    <li><a href="http://127.0.0.1:5500/templates/Multi%20Labels/lgm.html"   style="text-decoration:none" class="button-15" method="get" role="button"> Linear Regression</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/Multi%20Labels/lgrm.html"  style="text-decoration:none" class="button-15" method ="post" role="button" >Logistic Regression</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/Multi%20Labels/lvsmm.html" style="text-decoration:none" class="button-15" method ="post" role="button">LSVM</a></button></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/Multi%20Labels/knnm.html"  style="text-decoration:none" class="button-15" method ="post" role="button">Knn</a></button></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/Multi%20Labels/rfm.html"   style="text-decoration:none" class="button-15" method ="post" role="button">Random Forest</a></button></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/Multi%20Labels/dtm.html"   style="text-decoration:none" class="button-15" method ="post" role="button">Decision Tree</a></button></li>
                 </ul>
             </div>
             <div class="box">
                 <h2 class="center">Results</h2>
                 <ul>
-                    <li><a href="http://127.0.0.1:5500/templates/lg.html" class="button-15" method="get" role="button"> Linear Regression</a></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/lrg.html" class="button-15" method ="post" role="button" >Logistic Regression</a></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/lvsm.html" class="button-15" method ="post" role="button">LSVM</a></button></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/knn.html" class="button-15" method ="post" role="button">Knn</a></button></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/rf.html" class="button-15" method ="post" role="button">Random Forest</a></button></li><br/>
-                    <li><a href="http://127.0.0.1:5500/templates/dt.html" class="button-15" method ="post" role="button">Decision Tree</a></button></li>
+                    <li><a href="http://127.0.0.1:5500/templates/results/lr_bin_result.html"   style="text-decoration:none" class="button-15" method="get" role="button"> Linear Regression</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/results/logr_bin_results.html"  style="text-decoration:none" class="button-15" method ="post" role="button" >Logistic Regression</a></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/results/lvsm_bin_results.html" style="text-decoration:none" class="button-15" method ="post" role="button">LSVM</a></button></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/results/knn_bin_results.html"  style="text-decoration:none" class="button-15" method ="post" role="button">Knn</a></button></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/results/rf_bin_results.html"   style="text-decoration:none" class="button-15" method ="post" role="button">Random Forest</a></button></li><br/>
+                    <li><a href="http://127.0.0.1:5500/templates/results/dt_bin_results.html"   style="text-decoration:none" class="button-15" method ="post" role="button">Decision Tree</a></button></li>
                 </ul>
             </div>
         </div>
@@ -159,8 +237,8 @@
     <section id="client-section">
         <h1 class="h-primary center">Work Flow</h1>
         <div id="scroll-container">
-            <div id="scroll-text">Collecting Raw Network Packets>>>Preparing Data Set>>>Data Pre Processing>>>Data Normalization>>>Data Splitting>>><br/>
-                Train The Model>>>Evaluate the accuracy , precision , recall and f1 score>>> Created a Web App using Django framework.<div>
+            <div id="scroll-text"> <b>Collecting Raw Network Packets ➤ Preparing Data Set ➤ Data Pre Processing ➤ Data Normalization ➤ Data Splitting ➤<br/>
+                Train The Model ➤ Evaluate the accuracy, precision, recall and f1 score ➤ Created a Web App using Django framework.</b><div>
         </div>
     </section>
   <br/>

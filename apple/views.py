@@ -4,8 +4,11 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
 import joblib
+#with open('ML_models\lr_bin.joblib', 'rb') as f:
+    #loaded_lr_model =joblib.load(f)
 
-loaded_lr_model = joblib.load("ML_models\lr_bin.joblib")
+
+loaded_lr_model = joblib.load("ML_models/rf_bin.joblib")
 
 # Create your views here.
 @login_required(login_url='login')
@@ -53,8 +56,8 @@ def ResultsPage(request):
             "answer":b,
             "attack":a,
         }
-
         return render(request,'results.html',details)
+     
     return (request,'results.html')
 
 def SignUpPage(request):

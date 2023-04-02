@@ -2,17 +2,33 @@
 <html lang="en">
 
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Wine Company</title>
-    
+    <title>Results Page</title>
+    <link rel="stylesheet" href='{% static "home4.css"%}' type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Bree+Serif&display=swap" rel="stylesheet">
+    <style>
+      h2{
+        color: aliceblue;
+      }
+    </style>
 </head>
 <body>
 {% csrf_token%}
+<nav id="navbar">
+  <div id="logo">
+  </div>
+  <ul>
+      <li class="item"><a href="{% url 'home' %}">Home</a></li>
+      <li class="item"><a href="{% url 'home' %}#form">Form</a></li>
+      <li class="item"><a href="{% url 'home' %}#analyseddata-container">Analysed Data</a></li>
+      <li class="item"><a href="{% url 'logout' %}">Logout</a></li>
+  </ul>
+</nav>
 <section id="home">
-  <h1 class="h-primary" >Here are Your Results</h1>
+  <h1 class="h-primary">Here are Your Results</h1>
   <p style="font-size: 30px;">Your Score is: {{answer}}</p>
   <p style="font-size: 30px;">{{attack}}</p>
   <h2 id="h2">
